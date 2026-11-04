@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Hamees Mahmood</title>
+<meta name="description" content="Software engineer building backend systems that keep working when things fail. .NET, Azure, Node.js, Python.">
+<meta property="og:title" content="Hamees Mahmood">
+<meta property="og:description" content="Backend systems that keep working when things fail. Try to lose a message.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://hameesmahmood.github.io/">
+<meta property="og:image" content="https://hameesmahmood.github.io/assets/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#0f1416">
+<link rel="canonical" href="https://hameesmahmood.github.io/">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="assets/fonts/archivo.woff2" as="font" type="font/woff2" crossorigin>
+<script>try{var t=localStorage.getItem('theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+<link rel="stylesheet" href="style.css">
+<noscript><style>.demo { display: none; }</style></noscript>
+</head>
+<body>
+<div class="wrap">
+  <a class="skip" href="#main">Skip to content</a>
+  <nav class="top" aria-label="Main">
+    <a href="#experience">Experience</a>
+    <a href="#projects">Projects</a>
+    <a href="#contact">Contact</a>
+    <button type="button" id="theme" class="icon" aria-label="Switch between light and dark">
+      <svg class="moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5Z"/></svg>
+      <svg class="sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9 7 7M17 17l2.1 2.1M4.9 19.1 7 17M17 7l2.1-2.1"/></svg>
+    </button>
+  </nav>
+
+  <main id="main" tabindex="-1">
+  <div class="opening">
+  <header class="hero">
+    <h1>Hamees <span>Mahmood</span></h1>
+    <p class="thesis">I build backend systems that keep working when things fail.</p>
+    <p class="meta">Software engineer at SoftBuilds, working with .NET, Azure, Node.js and Python. Based in Pakistan.</p>
+    <p class="actions">
+      <a class="primary" href="mailto:hameesmahmood99@gmail.com">Email me</a>
+      <a href="https://github.com/Hameesmahmood">GitHub</a>
+      <a href="https://www.linkedin.com/in/hamees-mahmood-54b2102b1">LinkedIn</a>
+    </p>
+  </header>
+
+  <section class="demo" aria-labelledby="demo-title">
+    <div class="demo-head">
+      <div>
+        <h2 id="demo-title">Try to lose a message</h2>
+        <p>A small simulation of the queues I build. Messages are stored first, retried with growing delays, and set aside if they keep failing.</p>
+      </div>
+      <button type="button" id="kill" class="kill">Stop the worker</button>
+    </div>
+    <canvas id="queue" role="img" aria-label="Messages move through a queue to a worker. Failed messages loop back on a retry lane, and messages that keep failing are set aside and replayed later."></canvas>
+    <dl class="counters">
+      <div><dt>Received</dt><dd id="c-received">0</dd></div>
+      <div><dt>Delivered</dt><dd id="c-delivered">0</dd></div>
+      <div><dt>Retries</dt><dd id="c-retries">0</dd></div>
+      <div><dt>Set aside</dt><dd id="c-parked">0</dd></div>
+      <div class="lost"><dt>Lost</dt><dd id="c-lost">0</dd></div>
+    </dl>
+    <p id="status" class="sr" role="status"></p>
+  </section>
+  </div>
+
+  <section id="experience" aria-labelledby="experience-title">
+    <h2 id="experience-title">Experience</h2>
+    <article class="job">
+      <p class="when">Oct 2025 – Present</p>
+      <div>
+        <h3>Software Engineer, SoftBuilds</h3>
+        <ul>
+          <li>Build healthcare order-processing services in ASP.NET Core and Azure, handling 50K+ orders.</li>
+          <li>Designed blob journaling and replay workflows to find the root cause of failed orders and recover faster.</li>
+          <li>Built Durable Functions that automate the order lifecycle in 5,000-order batches.</li>
+          <li>Built a PDF overlay engine that cut document prep from 5–20 minutes to instant.</li>
+          <li>Built Azure Function monitoring and alerts that catch order processing failures early.</li>
+        </ul>
+        <ul class="tags" aria-label="Technologies">
+          <li>ASP.NET Core</li><li>C#</li><li>Azure Functions</li><li>Durable Functions</li><li>Blob Storage</li><li>Python</li><li>Node.js</li><li>Bitbucket Pipelines</li>
+        </ul>
+      </div>
+    </article>
+    <article class="job">
+      <p class="when">Jun 2024 – Jul 2025</p>
+      <div>
+        <h3>Full-Stack Engineer, Flippin Technologies</h3>
+        <ul>
+          <li>Built a MERN e-commerce platform with authentication, product management, cart and Braintree payments.</li>
+          <li>Designed a responsive admin dashboard with interactive data visualizations.</li>
+          <li>Built a full-stack gamified learning platform with interactive challenges.</li>
+        </ul>
+        <ul class="tags" aria-label="Technologies">
+          <li>MongoDB</li><li>Express</li><li>React</li><li>Node.js</li><li>Next.js</li><li>TypeScript</li><li>Tailwind CSS</li>
+        </ul>
+      </div>
+    </article>
+  </section>
+
+  <section id="projects" aria-labelledby="projects-title">
+    <h2 id="projects-title">Projects</h2>
+    <p class="intro">I'm shipping one small distributed systems or AI project a week, each with a result you can reproduce. Next up: a self-hosted webhook inbox.</p>
+
+    <article class="feature">
+      <a class="shot" href="https://ajaia-docs-two-sigma.vercel.app"><img src="assets/ajaia-docs.png" alt="The Ajaia Docs home screen, showing a user's documents and a shared section" width="1440" height="959" loading="lazy"></a>
+      <div>
+        <h3>Ajaia Docs</h3>
+        <p>A collaborative document editor with autosave and role-based sharing. Access rules are enforced on the server, and a failed save can be retried.</p>
+        <ul class="tags" aria-label="Technologies">
+          <li>Next.js</li><li>TypeScript</li><li>Drizzle</li><li>Turso</li><li>Vitest</li>
+        </ul>
+        <p class="links"><a href="https://ajaia-docs-two-sigma.vercel.app">Live demo</a><a href="https://github.com/Hameesmahmood/ajaia-docs">Code</a></p>
+      </div>
+    </article>
+
+    <div class="games">
+      <div class="games-intro">
+        <h3>Games for TheraLearn</h3>
+        <p>I built these games for <a href="https://thera-learn.vercel.app">TheraLearn</a>, a learning platform for children with Down syndrome.</p>
+      </div>
+      <ul class="rows">
+        <li><strong>Sketch Book</strong><span>A drawing canvas with brushes, colours and backgrounds.</span><p class="links"><a href="https://sketch-book-neon.vercel.app">Live demo</a><a href="https://github.com/Hameesmahmood/Sketch_Book">Code</a></p></li>
+        <li><strong>Endless Runner</strong><span>A browser runner game built on the Kaplay engine.</span><p class="links"><a href="https://endless-runner-mu.vercel.app">Live demo</a><a href="https://github.com/Hameesmahmood/endless_runner">Code</a></p></li>
+        <li><strong>Spelling Bee</strong><span>A spelling game that reads each word aloud with speech synthesis.</span><p class="links"><a href="https://github.com/Hameesmahmood/Spelling-Bee-Game">Code</a></p></li>
+      </ul>
+    </div>
+  </section>
+
+  <section aria-labelledby="skills-title">
+    <h2 id="skills-title">Skillset</h2>
+    <dl class="skills">
+      <div><dt>Languages</dt><dd>C#, TypeScript, JavaScript, Python</dd></div>
+      <div><dt>Backend</dt><dd>ASP.NET Core, Node.js, Express, Flask, Azure Functions, Durable Functions</dd></div>
+      <div><dt>Frontend</dt><dd>React, Next.js, Tailwind CSS</dd></div>
+      <div><dt>Data</dt><dd>SQL Server, MySQL, MongoDB</dd></div>
+      <div><dt>Cloud and tools</dt><dd>Azure, Bitbucket Pipelines, Git, Linux</dd></div>
+    </dl>
+  </section>
+
+  </main>
+
+  <footer id="contact">
+    <h2>Get in touch</h2>
+    <a class="mail" href="mailto:hameesmahmood99@gmail.com">hameesmahmood99@gmail.com</a>
+    <p class="links"><a href="https://github.com/Hameesmahmood">GitHub</a><a href="https://www.linkedin.com/in/hamees-mahmood-54b2102b1">LinkedIn</a></p>
+  </footer>
+</div>
+<script src="app.js"></script>
+</body>
+</html>
