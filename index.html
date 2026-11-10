@@ -101,7 +101,27 @@
 
   <section id="projects" aria-labelledby="projects-title">
     <h2 id="projects-title">Projects</h2>
-    <p class="intro">I'm shipping one small distributed systems or AI project a week, each with a result you can reproduce. Next up: a self-hosted webhook inbox.</p>
+    <p class="intro">I'm shipping one small distributed systems or AI project a week, each with a result you can reproduce. Next up: crash-safe batch workflows.</p>
+
+    <article class="feature">
+      <a class="shot chart" href="https://github.com/Hameesmahmood/webhook-inbox/blob/main/docs/RESULTS.md">
+        <img class="on-dark" src="assets/webhook-inbox-chart-dark.svg" alt="Chart of a chaos run: 10,000 webhooks were all delivered in about two minutes while workers were killed 35 times. Nothing was lost; 154 were delivered twice." width="820" height="334" loading="lazy">
+        <img class="on-light" src="assets/webhook-inbox-chart-light.svg" alt="Chart of a chaos run: 10,000 webhooks were all delivered in about two minutes while workers were killed 35 times. Nothing was lost; 154 were delivered twice." width="820" height="334" loading="lazy">
+      </a>
+      <div>
+        <h3>Webhook Inbox</h3>
+        <p>A self-hosted inbox that stores each webhook before acknowledging it, delivers it to your app with retries, and lets you replay what failed. Postgres is the queue.</p>
+        <ul class="points">
+          <li>10,000 webhooks sent while workers were killed 35 times: 0 lost, 154 delivered twice.</li>
+          <li>Every guarantee has a test that switches it off and shows what breaks.</li>
+          <li>CI runs a 2,000-event chaos test on every push.</li>
+        </ul>
+        <ul class="tags" aria-label="Technologies">
+          <li>.NET 10</li><li>C#</li><li>PostgreSQL</li><li>Dapper</li><li>Docker</li><li>GitHub Actions</li>
+        </ul>
+        <p class="links"><a href="https://github.com/Hameesmahmood/webhook-inbox/blob/main/docs/RESULTS.md">Results</a><a href="https://github.com/Hameesmahmood/webhook-inbox">Code</a></p>
+      </div>
+    </article>
 
     <article class="feature">
       <a class="shot" href="https://ajaia-docs-two-sigma.vercel.app"><img src="assets/ajaia-docs.png" alt="The Ajaia Docs home screen, showing a user's documents and a shared section" width="1440" height="959" loading="lazy"></a>
