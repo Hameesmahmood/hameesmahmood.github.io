@@ -101,7 +101,27 @@
 
   <section id="projects" aria-labelledby="projects-title">
     <h2 id="projects-title">Projects</h2>
-    <p class="intro">I'm shipping one small distributed systems or AI project a week, each with a result you can reproduce. Next up: crash-safe batch workflows.</p>
+    <p class="intro">I'm shipping one small distributed systems or AI project a week, each with a result you can reproduce. Next up: a scaling ladder, taking an API from slow to fast one measured change at a time.</p>
+
+    <article class="feature">
+      <a class="shot chart" href="https://github.com/Hameesmahmood/crash-safe-batch/blob/main/docs/RESULTS.md">
+        <img class="on-dark" src="assets/crash-safe-batch-chart-dark.svg" alt="Chart of throughput against chunk size: 140 rows per second at 1 row per chunk, 7,412 at the default of 500, and 10,774 at 5,000." width="820" height="320" loading="lazy">
+        <img class="on-light" src="assets/crash-safe-batch-chart-light.svg" alt="Chart of throughput against chunk size: 140 rows per second at 1 row per chunk, 7,412 at the default of 500, and 10,774 at 5,000." width="820" height="320" loading="lazy">
+      </a>
+      <div>
+        <h3>Crash-safe batch</h3>
+        <p>A TypeScript library that runs long batch jobs in checkpointed steps. Kill the worker at any moment and the job resumes where it left off, with output identical to a run that was never interrupted.</p>
+        <ul class="points">
+          <li>A 50,000-row ledger import, run 10 times while workers were killed 2,194 times: every result identical to an uninterrupted run.</li>
+          <li>If a later step fails for good, the finished steps are undone with reversing entries, never deletes.</li>
+          <li>Every guarantee has a test that switches it off, and CI runs a crash test on every push.</li>
+        </ul>
+        <ul class="tags" aria-label="Technologies">
+          <li>TypeScript</li><li>Node.js</li><li>PostgreSQL</li><li>Vitest</li><li>Testcontainers</li><li>GitHub Actions</li>
+        </ul>
+        <p class="links"><a href="https://github.com/Hameesmahmood/crash-safe-batch/blob/main/docs/RESULTS.md">Results</a><a href="https://github.com/Hameesmahmood/crash-safe-batch">Code</a></p>
+      </div>
+    </article>
 
     <article class="feature">
       <a class="shot chart" href="https://github.com/Hameesmahmood/webhook-inbox/blob/main/docs/RESULTS.md">
