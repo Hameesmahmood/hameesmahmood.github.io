@@ -6,6 +6,7 @@
 :root {
   --ground: #0f1416; --raised: #151c1f; --line: #2b363a; --text: #e8eeee; --muted: #a0adaf;
   --accent: #f0b04a; --on-accent: #1a1204; --ok: #6fd6b0; --bad: #ff8d7a; --flow: #c5d0d1; --lane: #4d5d62;
+  --chart-good: #36a87f; --chart-warn: #c88520;
   --rail: 190px; --section: 104px;
   --sans: "Archivo", "Helvetica Neue", Arial, sans-serif;
   --mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
@@ -14,6 +15,7 @@
 :root[data-theme="light"] {
   --ground: #eef1f1; --raised: #fafbfb; --line: #c9d2d3; --text: #12191b; --muted: #4c595c;
   --accent: #8a5200; --on-accent: #fff8ec; --ok: #0a7555; --bad: #b0341d; --flow: #3c494c; --lane: #97a5a8;
+  --chart-good: #0a7555; --chart-warn: #8a5200;
   color-scheme: light;
 }
 
@@ -93,6 +95,17 @@ section > h2 { margin-bottom: 28px; }
 .feature .tags { margin-top: 2px; }
 .feature .points { margin-top: 0; }
 .feature + .feature { margin-top: 64px; }
+/* Project charts: a static SVG until charts.js swaps in the live chart. Mark colours are a step darker
+   than --ok and --accent in dark mode, so lines and fills sit inside the readable lightness band. */
+.chart { margin: 0; display: grid; gap: 12px; padding: 16px 16px 14px; border: 1px solid var(--line); border-radius: 6px; background: var(--raised); min-width: 0; }
+.chart-plot img { display: block; width: 100%; height: auto; }
+.chart.live .chart-plot { height: 300px; }
+.chart figcaption { display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 0.82rem; line-height: 1.45; color: var(--muted); }
+.key { display: inline-flex; align-items: center; gap: 8px; }
+.key i { width: 14px; height: 2px; border-radius: 1px; }
+.key.good i { background: var(--chart-good); }
+.key.warn i { background: var(--chart-warn); }
+.key.tick i { width: 2px; height: 10px; background: var(--muted); }
 .chart .on-light { display: none; }
 :root[data-theme="light"] .chart .on-light { display: block; }
 :root[data-theme="light"] .chart .on-dark { display: none; }
@@ -123,6 +136,7 @@ footer { display: grid; gap: 12px; justify-items: start; margin-top: var(--secti
   .opening { gap: 44px; }
   .job, .games, .skills > div { grid-template-columns: minmax(0, 1fr); }
   .feature { grid-template-columns: minmax(0, 1fr); gap: 20px; }
+  .chart.live .chart-plot { height: 260px; }
   .rows li { grid-template-columns: minmax(0, 1fr); }
   .rows .links { justify-content: flex-start; }
   .counters { grid-template-columns: repeat(3, 1fr); gap: 10px; }

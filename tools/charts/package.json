@@ -1,0 +1,13 @@
+{
+  "name": "portfolio-charts",
+  "private": true,
+  "description": "Builds the trimmed ECharts bundle the portfolio's project charts use.",
+  "type": "module",
+  "scripts": {
+    "build": "esbuild entry.js --bundle --minify --format=iife --global-name=echarts --outfile=../../assets/js/echarts.min.js --legal-comments=eof"
+  },
+  "devDependencies": {
+    "echarts": "6.1.0",
+    "esbuild": "0.28.2"
+  }
+}

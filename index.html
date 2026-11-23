@@ -104,10 +104,13 @@
     <p class="intro">I'm shipping one small distributed systems or AI project a week, each with a result you can reproduce. Next up: a scaling ladder, taking an API from slow to fast one measured change at a time.</p>
 
     <article class="feature">
-      <a class="shot chart" href="https://github.com/Hameesmahmood/crash-safe-batch/blob/main/docs/RESULTS.md">
-        <img class="on-dark" src="assets/crash-safe-batch-chart-dark.svg" alt="Chart of throughput against chunk size: 140 rows per second at 1 row per chunk, 7,412 at the default of 500, and 10,774 at 5,000." width="820" height="320" loading="lazy">
-        <img class="on-light" src="assets/crash-safe-batch-chart-light.svg" alt="Chart of throughput against chunk size: 140 rows per second at 1 row per chunk, 7,412 at the default of 500, and 10,774 at 5,000." width="820" height="320" loading="lazy">
-      </a>
+      <figure class="chart" data-chart="bench" data-src="assets/data/crash-safe-batch-bench.json" role="img" aria-label="Chart of throughput against chunk size: 140 rows per second at 1 row per chunk, 7,412 at the default of 500, and 10,774 at 5,000.">
+        <div class="chart-plot">
+          <img class="on-dark" src="assets/crash-safe-batch-chart-dark.svg" alt="" width="820" height="320" loading="lazy">
+          <img class="on-light" src="assets/crash-safe-batch-chart-light.svg" alt="" width="820" height="320" loading="lazy">
+        </div>
+        <figcaption>Rows per second posting 20,000 transactions, by rows per chunk (log scale). Median of 3 runs, which differed by under 3%.</figcaption>
+      </figure>
       <div>
         <h3>Crash-safe batch</h3>
         <p>A TypeScript library that runs long batch jobs in checkpointed steps. Kill the worker at any moment and the job resumes where it left off, with output identical to a run that was never interrupted.</p>
@@ -124,10 +127,17 @@
     </article>
 
     <article class="feature">
-      <a class="shot chart" href="https://github.com/Hameesmahmood/webhook-inbox/blob/main/docs/RESULTS.md">
-        <img class="on-dark" src="assets/webhook-inbox-chart-dark.svg" alt="Chart of a chaos run: 10,000 webhooks were all delivered in about two minutes while workers were killed 35 times. Nothing was lost; 154 were delivered twice." width="820" height="334" loading="lazy">
-        <img class="on-light" src="assets/webhook-inbox-chart-light.svg" alt="Chart of a chaos run: 10,000 webhooks were all delivered in about two minutes while workers were killed 35 times. Nothing was lost; 154 were delivered twice." width="820" height="334" loading="lazy">
-      </a>
+      <figure class="chart" data-chart="chaos" data-src="assets/data/webhook-inbox-chaos.json" role="img" aria-label="Chart of a chaos run: 10,000 webhooks were all delivered in about two minutes while workers were killed 35 times. Nothing was lost; 154 were delivered twice.">
+        <div class="chart-plot">
+          <img class="on-dark" src="assets/webhook-inbox-chart-dark.svg" alt="" width="820" height="334" loading="lazy">
+          <img class="on-light" src="assets/webhook-inbox-chart-light.svg" alt="" width="820" height="334" loading="lazy">
+        </div>
+        <figcaption>
+          <span class="key good"><i></i>Delivered</span>
+          <span class="key warn"><i></i>Waiting (queued or in flight)</span>
+          <span class="key tick"><i></i>Worker killed with SIGKILL</span>
+        </figcaption>
+      </figure>
       <div>
         <h3>Webhook Inbox</h3>
         <p>A self-hosted inbox that stores each webhook before acknowledging it, delivers it to your app with retries, and lets you replay what failed. Postgres is the queue.</p>
@@ -187,5 +197,6 @@
   </footer>
 </div>
 <script src="app.js"></script>
+<script src="charts.js" defer></script>
 </body>
 </html>
