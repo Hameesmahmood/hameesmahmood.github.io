@@ -204,7 +204,7 @@
     const option = kind.option(entry.data, t);
     if (!animate) option.animation = false;
     entry.chart.setOption(option, true);
-    entry.chart.setOption({ aria: { enabled: true, label: { description: figure.getAttribute('aria-label') } } });
+    entry.chart.setOption({ aria: { enabled: true, label: { description: figure.querySelector('.chart-plot').getAttribute('aria-label') } } });
     kind.decorate?.(entry.chart, entry.data, t);
     charts.set(figure, entry);
   }

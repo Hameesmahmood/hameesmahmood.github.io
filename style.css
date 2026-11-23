@@ -100,7 +100,31 @@ section > h2 { margin-bottom: 28px; }
 .chart { margin: 0; display: grid; gap: 12px; padding: 16px 16px 14px; border: 1px solid var(--line); border-radius: 6px; background: var(--raised); min-width: 0; }
 .chart-plot img { display: block; width: 100%; height: auto; }
 .chart.live .chart-plot { height: 300px; }
-.chart figcaption { display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 0.82rem; line-height: 1.45; color: var(--muted); }
+.chart .note { display: flex; flex-wrap: wrap; gap: 6px 18px; margin-top: 12px; font-size: 0.82rem; line-height: 1.45; color: var(--muted); }
+.chart p.note { display: block; }
+.chart .note code { font-family: var(--mono); font-size: 0.95em; color: var(--text); }
+.view[hidden] { display: none; }
+
+/* Results / Watch it run. Shown only when demos.js runs, so without JavaScript the chart stands alone. */
+.views { display: none; gap: 4px; margin: -4px 0 4px; }
+.has-demo .views { display: flex; }
+.views button { font: 500 0.82rem/1 var(--sans); color: var(--muted); background: none; border: 1px solid transparent; border-radius: 4px; padding: 7px 10px; cursor: pointer; }
+.views button:hover { color: var(--text); }
+.views button[aria-selected="true"] { color: var(--text); border-color: var(--line); background: var(--ground); }
+.views .dur { font-family: var(--mono); font-weight: 400; color: var(--muted); margin-left: 4px; }
+
+/* The terminal player, in the site's palette. ANSI yellow is the prompt, so it takes the accent. */
+.demo-player { min-height: 200px; border-radius: 4px; overflow: hidden; }
+/* The player draws its terminal on a <canvas>; don't let the queue demo's canvas frame apply to it. */
+.demo-player canvas { border: 0; border-radius: 0; background: none; }
+/* Doubled class: the player's own stylesheet loads later and would otherwise reset these to black. */
+.ap-player.asciinema-player-theme-site {
+  --term-color-foreground: var(--text); --term-color-background: var(--raised);
+  --term-color-0: var(--ground); --term-color-1: var(--bad); --term-color-2: var(--ok); --term-color-3: var(--accent);
+  --term-color-4: var(--flow); --term-color-5: var(--flow); --term-color-6: var(--ok); --term-color-7: var(--text);
+  --term-color-8: var(--muted); --term-color-9: var(--bad); --term-color-10: var(--ok); --term-color-11: var(--accent);
+  --term-color-12: var(--flow); --term-color-13: var(--flow); --term-color-14: var(--ok); --term-color-15: var(--text);
+}
 .key { display: inline-flex; align-items: center; gap: 8px; }
 .key i { width: 14px; height: 2px; border-radius: 1px; }
 .key.good i { background: var(--chart-good); }

@@ -104,12 +104,22 @@
     <p class="intro">I'm shipping one small distributed systems or AI project a week, each with a result you can reproduce. Next up: a scaling ladder, taking an API from slow to fast one measured change at a time.</p>
 
     <article class="feature">
-      <figure class="chart" data-chart="bench" data-src="assets/data/crash-safe-batch-bench.json" role="img" aria-label="Chart of throughput against chunk size: 140 rows per second at 1 row per chunk, 7,412 at the default of 500, and 10,774 at 5,000.">
-        <div class="chart-plot">
+      <figure class="chart" data-chart="bench" data-src="assets/data/crash-safe-batch-bench.json" data-demo="assets/demos/crash-safe-batch-demo.cast">
+        <div class="views" role="tablist" aria-label="Evidence">
+          <button type="button" role="tab" id="csb-results-tab" aria-controls="csb-results" aria-selected="true">Results</button>
+          <button type="button" role="tab" id="csb-demo-tab" aria-controls="csb-demo" aria-selected="false" tabindex="-1">Watch it run <span class="dur">0:13</span></button>
+        </div>
+        <div class="view" id="csb-results" role="tabpanel" aria-labelledby="csb-results-tab">
+          <div class="chart-plot" role="img" aria-label="Chart of throughput against chunk size: 140 rows per second at 1 row per chunk, 7,412 at the default of 500, and 10,774 at 5,000.">
           <img class="on-dark" src="assets/crash-safe-batch-chart-dark.svg" alt="" width="820" height="320" loading="lazy">
           <img class="on-light" src="assets/crash-safe-batch-chart-light.svg" alt="" width="820" height="320" loading="lazy">
+          </div>
+          <div class="note">Rows per second posting 20,000 transactions, by rows per chunk (log scale). Median of 3 runs, which differed by under 3%.</div>
         </div>
-        <figcaption>Rows per second posting 20,000 transactions, by rows per chunk (log scale). Median of 3 runs, which differed by under 3%.</figcaption>
+        <div class="view" id="csb-demo" role="tabpanel" aria-labelledby="csb-demo-tab" hidden>
+          <div class="demo-player"></div>
+          <p class="note">A real run of <code>npm run demo</code>: worker A is killed at row 20,000, worker B resumes there, and the ledger matches an uninterrupted import. Pauses over 2 s are shortened.</p>
+        </div>
       </figure>
       <div>
         <h3>Crash-safe batch</h3>
@@ -127,16 +137,24 @@
     </article>
 
     <article class="feature">
-      <figure class="chart" data-chart="chaos" data-src="assets/data/webhook-inbox-chaos.json" role="img" aria-label="Chart of a chaos run: 10,000 webhooks were all delivered in about two minutes while workers were killed 35 times. Nothing was lost; 154 were delivered twice.">
-        <div class="chart-plot">
+      <figure class="chart" data-chart="chaos" data-src="assets/data/webhook-inbox-chaos.json" data-demo="assets/demos/webhook-inbox-demo.cast">
+        <div class="views" role="tablist" aria-label="Evidence">
+          <button type="button" role="tab" id="wi-results-tab" aria-controls="wi-results" aria-selected="true">Results</button>
+          <button type="button" role="tab" id="wi-demo-tab" aria-controls="wi-demo" aria-selected="false" tabindex="-1">Watch it run <span class="dur">0:14</span></button>
+        </div>
+        <div class="view" id="wi-results" role="tabpanel" aria-labelledby="wi-results-tab">
+          <div class="chart-plot" role="img" aria-label="Chart of a chaos run: 10,000 webhooks were all delivered in about two minutes while workers were killed 35 times. Nothing was lost; 154 were delivered twice.">
           <img class="on-dark" src="assets/webhook-inbox-chart-dark.svg" alt="" width="820" height="334" loading="lazy">
           <img class="on-light" src="assets/webhook-inbox-chart-light.svg" alt="" width="820" height="334" loading="lazy">
+          </div>
+          <div class="note"><span class="key good"><i></i>Delivered</span>
+            <span class="key warn"><i></i>Waiting (queued or in flight)</span>
+            <span class="key tick"><i></i>Worker killed with SIGKILL</span></div>
         </div>
-        <figcaption>
-          <span class="key good"><i></i>Delivered</span>
-          <span class="key warn"><i></i>Waiting (queued or in flight)</span>
-          <span class="key tick"><i></i>Worker killed with SIGKILL</span>
-        </figcaption>
+        <div class="view" id="wi-demo" role="tabpanel" aria-labelledby="wi-demo-tab" hidden>
+          <div class="demo-player"></div>
+          <p class="note">A real run of <code>scripts/demo.py</code>, one of three recorded; none of the three lost an event. Pauses over 2 s are shortened, including the 30-second lease wait.</p>
+        </div>
       </figure>
       <div>
         <h3>Webhook Inbox</h3>
@@ -198,5 +216,6 @@
 </div>
 <script src="app.js"></script>
 <script src="charts.js" defer></script>
+<script src="demos.js" defer></script>
 </body>
 </html>

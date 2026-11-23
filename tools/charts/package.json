@@ -1,12 +1,14 @@
 {
   "name": "portfolio-charts",
   "private": true,
-  "description": "Builds the trimmed ECharts bundle the portfolio's project charts use.",
+  "description": "Builds and copies the third-party code the portfolio's project charts and terminal demos use.",
   "type": "module",
   "scripts": {
-    "build": "esbuild entry.js --bundle --minify --format=iife --global-name=echarts --outfile=../../assets/js/echarts.min.js --legal-comments=eof"
+    "build": "esbuild entry.js --bundle --minify --format=iife --global-name=echarts --outfile=../../assets/js/echarts.min.js --legal-comments=eof",
+    "vendor": "cp node_modules/asciinema-player/dist/bundle/asciinema-player.min.js ../../assets/js/ && cp node_modules/asciinema-player/dist/bundle/asciinema-player.css ../../assets/css/"
   },
   "devDependencies": {
+    "asciinema-player": "3.18.0",
     "echarts": "6.1.0",
     "esbuild": "0.28.2"
   }
