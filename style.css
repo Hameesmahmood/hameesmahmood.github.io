@@ -41,6 +41,7 @@ main:focus { outline: none; }
 .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 .skip { position: absolute; left: 20px; top: -60px; z-index: 2; padding: 9px 16px; border-radius: 6px; background: var(--accent); color: var(--on-accent); font-weight: 600; text-decoration: none; }
 .skip:focus { top: 16px; color: var(--on-accent); }
+.skip:hover { color: var(--on-accent); }
 
 .top { display: flex; justify-content: flex-end; align-items: center; gap: 24px; font-size: 0.95rem; margin-bottom: 48px; }
 .top a { text-decoration: none; color: var(--muted); }
