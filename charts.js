@@ -188,7 +188,91 @@
     },
   };
 
-  const kinds = { chaos, bench };
+  // Scaling ladder: the capacity each step sustains, on a log scale, with the steps that repeated runs
+  // can't tell apart grouped in one band. Each step's tooltip says what ran out.
+  const ladder = {
+    option(d, t) {
+      const rate = n => (n < 10 ? n.toFixed(1) : num(n));
+      const shown = d.steps.filter(s => s.step < d.plateau.from).map(s => s.step);
+      return {
+        ...base(t),
+        grid: { left: 46, right: 18, top: 18, bottom: 50 },
+        xAxis: {
+          type: 'category', data: d.steps.map(s => s.short),
+          axisLabel: {
+            interval: 0, lineHeight: 15, margin: 12,
+            formatter: (v, i) => `{s|${i}}\n{n|${v}}`,
+            rich: { s: { fontFamily: t.mono, fontSize: 11, color: t.muted }, n: { fontFamily: t.sans, fontSize: 11, color: t.text } },
+          },
+          axisLine: { lineStyle: { color: t.line } }, axisTick: { show: false },
+        },
+        yAxis: {
+          type: 'log', logBase: 10, min: 1, max: 10000,
+          axisLabel: { ...axisLabel(t), formatter: v => compact(v) },
+          splitLine: { lineStyle: { color: t.line, opacity: 0.6 } },
+        },
+        tooltip: {
+          ...base(t).tooltip,
+          axisPointer: { type: 'shadow', shadowStyle: { color: t.flow, opacity: 0.06 } },
+          formatter: ps => {
+            const s = d.steps[ps[0].dataIndex];
+            return `<div style="font-family:${t.mono};color:${t.muted};font-size:12px;margin-bottom:6px">Step ${s.step} · ${s.name}</div>` +
+              row(t, null, 'Capacity, one search', `${rate(s.capacity)}/s`) +
+              (s.repeats ? row(t, null, 'Passed 2 of 3 repeats', `${num(s.repeats[0])}/s`) + row(t, null, 'Failed every repeat', `${num(s.repeats[1])}/s`) : '') +
+              row(t, null, 'One request, median', `${s.p50 < 10 ? s.p50.toFixed(1) : num(s.p50)} ms`) +
+              `<div style="color:${t.muted};font-size:12px;line-height:1.4;margin-top:8px;max-width:230px;white-space:normal">Ran out: ${s.ranOut}</div>`;
+          },
+        },
+        series: [{
+          type: 'line', symbol: 'circle', symbolSize: 8,
+          data: d.steps.map(s => ({
+            value: s.capacity,
+            // Beside each point, on the side the line leaves free: it climbs steeply out of step 0
+            // and into steps 1 and 2, so step 0's label goes right and the next two go left.
+            label: shown.includes(s.step)
+              ? { show: true, position: s.step === 0 ? 'right' : 'left', distance: 10, color: t.text, fontFamily: t.mono, fontWeight: 500, fontSize: 12, formatter: rate(s.capacity) }
+              : { show: false },
+          })),
+          lineStyle: { color: t.flow, width: 2 },
+          itemStyle: { color: t.flow, borderColor: t.raised, borderWidth: 2 },
+          emphasis: { scale: 1.3 },
+        }],
+      };
+    },
+    // The band behind steps 3 to 5 needs pixel positions, so it's drawn once the axes exist.
+    decorate(chart, d, t) {
+      const at = i => chart.convertToPixel({ xAxisIndex: 0 }, d.steps[i].short);
+      const band = at(1) - at(0);
+      const left = at(d.plateau.from) - band / 2 + 3;
+      const right = at(d.plateau.to) + band / 2 - 3;
+      const top = chart.convertToPixel({ yAxisIndex: 0 }, 10000);
+      const bottom = chart.convertToPixel({ yAxisIndex: 0 }, 1);
+      // On a phone a step's column is about 50 px, so the names drop a size.
+      chart.setOption({ xAxis: { axisLabel: { rich: { n: { fontSize: band < 64 ? 10 : 11 } } } } });
+      chart.setOption({
+        graphic: [
+          {
+            type: 'rect', silent: true, z: -1,
+            shape: { x: left, y: top, width: right - left, height: bottom - top, r: 4 },
+            style: { fill: t.flow, opacity: 0.07 },
+          },
+          {
+            // Low in the band: the three points sit near its top.
+            type: 'text', silent: true, left: left + 12, top: bottom - 44,
+            style: {
+              text: `{v|about ${num(d.plateau.about)}/s}\n{l|within noise}`,
+              rich: {
+                v: { fontFamily: t.mono, fontWeight: 500, fontSize: 12, fill: t.text, lineHeight: 16 },
+                l: { fontFamily: t.sans, fontSize: 11, fill: t.muted, lineHeight: 15 },
+              },
+            },
+          },
+        ],
+      }, { replaceMerge: ['graphic'] });
+    },
+  };
+
+  const kinds = { chaos, bench, ladder };
 
   async function render(figure, animate) {
     const kind = kinds[figure.dataset.chart];

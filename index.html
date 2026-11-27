@@ -101,7 +101,32 @@
 
   <section id="projects" aria-labelledby="projects-title">
     <h2 id="projects-title">Projects</h2>
-    <p class="intro">I'm shipping one small distributed systems or AI project a week, each with a result you can reproduce. Next up: a scaling ladder, taking an API from slow to fast one measured change at a time.</p>
+    <p class="intro">I'm shipping one small distributed systems or AI project a week, each with a result you can reproduce. Next up: a test bench that scores LLMs on pulling typed fields out of messy documents.</p>
+
+    <article class="feature">
+      <figure class="chart" data-chart="ladder" data-src="assets/data/scaling-ladder.json">
+        <div class="view">
+          <div class="chart-plot" role="img" aria-label="Chart of capacity by step, on a log scale: 1.3 requests a second at the baseline, 128 with indexes, 2,176 with connection pooling, then about 3,000 for the cache, stampede protection and three instances, which repeated runs can't tell apart.">
+          <img class="on-dark" src="assets/scaling-ladder-chart-dark.svg" alt="" width="820" height="285" loading="lazy">
+          <img class="on-light" src="assets/scaling-ladder-chart-light.svg" alt="" width="820" height="285" loading="lazy">
+          </div>
+          <div class="note">Requests a second each step sustains with p99 under 250 ms (log scale), on one 4-core laptop. Each step is the one before plus one change.</div>
+        </div>
+      </figure>
+      <div>
+        <h3>Scaling ladder</h3>
+        <p>A shipment-tracking API taken from slow to fast one change at a time, with the same load test after every change: indexes, connection pooling, a Redis cache, stampede protection, then a load balancer.</p>
+        <ul class="points">
+          <li>From 1.3 to about 3,000 requests a second. Indexes gave 98 times, and pooling 17 times again.</li>
+          <li>Every step records where the bottleneck moved, and repeated runs show which differences are real.</li>
+          <li>Killing one of three instances mid-run failed 0 of 58,864 reads, with Nginx retrying them on another.</li>
+        </ul>
+        <ul class="tags" aria-label="Technologies">
+          <li>.NET 10</li><li>C#</li><li>PostgreSQL</li><li>Redis</li><li>Nginx</li><li>k6</li><li>Docker</li>
+        </ul>
+        <p class="links"><a href="https://github.com/Hameesmahmood/scaling-ladder/blob/main/docs/RESULTS.md">Results</a><a href="https://github.com/Hameesmahmood/scaling-ladder">Code</a></p>
+      </div>
+    </article>
 
     <article class="feature">
       <figure class="chart" data-chart="bench" data-src="assets/data/crash-safe-batch-bench.json" data-demo="assets/demos/crash-safe-batch-demo.cast">
